@@ -21,7 +21,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="m-0"><i class="bi bi-file-earmark-pdf-fill"></i> Preencher Relatório Mensal</h5>
                         <span class="badge bg-warning text-dark">
-                            <i class="bi bi-person-fill"></i> <span th:text="${relatorio.funcionario.nomeCompleto}">Instrutor</span>
+                            <i class="bi bi-person-fill"></i> <span th:text="${relatorio.funcionario.nomeCompleto}">Nome Completo</span>
                         </span>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         <div class="mb-4">
                             <label class="form-label fw-bold">Curso / Atividade</label>
                             <input type="text" th:field="*{curso}" class="form-control form-control-lg"
-                                   placeholder="Ex: Dança, Ginástica Localizada, Futsal..." required>
+                                   placeholder="Ex: Dança, Balé, Funcional..." required>
                         </div>
 
                         <div class="mb-4 p-3 bg-white rounded border">

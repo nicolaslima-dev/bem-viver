@@ -45,8 +45,9 @@
                                 <td class="ps-4 fw-bold" th:text="${t.nucleo}">Núcleo</td>
 
                                 <td>
-                                    <span th:if="${t.modalidade == 'Futsal'}" class="badge bg-warning text-dark">Futsal</span>
-                                    <span th:if="${t.modalidade == 'Futebol'}" class="badge bg-primary">Futebol</span>
+                                    <span th:if="${t.modalidade == 'Dança'}" class="badge bg-warning text-dark">Dança</span>
+                                    <span th:if="${t.modalidade == 'Balé'}" class="badge bg-success">Balé</span>
+                                    <span th:if="${t.modalidade == 'Funcional'}" class="badge bg-primary">Funcional</span>
                                 </td>
 
                                 <td th:text="${t.nome}">Nome</td>

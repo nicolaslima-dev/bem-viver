@@ -3,34 +3,77 @@
 <head th:fragment="cabecalho">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gol Social - Gestão</title>
+    <title>Projeto Bem Viver - Gestão</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
         :root {
-            --cor-principal: #5F1B58;
-            --cor-hover: #4a1544;
-            --cor-texto-menu: #f8eaf6;
-            --cor-destaque: #f1c40f;
+            /* Paleta extraída da logo Bem Viver */
+            --cor-principal: #4A74B1;   /* Azul Profundo (Cristo) */
+            --cor-hover: #3a5d8f;       /* Variação mais escura do azul */
+            --cor-texto-menu: #EBE9E4;  /* Off-white para leitura suave */
+            --cor-destaque: #F7D147;    /* Amarelo Sol (Logo) */
+            --cor-sucesso: #3A9D4B;     /* Verde Vital (Mãos) */
+            --cor-fundo-claro: #f4f6f9;
         }
+
+        body { background-color: var(--cor-fundo-claro); }
+
         .bg-brand { background-color: var(--cor-principal) !important; color: white; }
-        .btn-primary { background-color: var(--cor-principal); border-color: var(--cor-principal); }
-        .btn-primary:hover { background-color: var(--cor-hover); border-color: var(--cor-hover); }
+
+        /* Botão Principal em Azul Profundo */
+        .btn-primary {
+            background-color: var(--cor-principal);
+            border-color: var(--cor-principal);
+        }
+        .btn-primary:hover {
+            background-color: var(--cor-hover);
+            border-color: var(--cor-hover);
+        }
+
+        /* Sidebar com a nova identidade */
         .sidebar {
-            height: 100vh; background-color: var(--cor-principal); color: white;
-            padding-top: 20px; position: sticky; top: 0; z-index: 1000;
+            height: 100vh;
+            background-color: var(--cor-principal);
+            color: white;
+            padding-top: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
+
         .sidebar a {
-            color: var(--cor-texto-menu); text-decoration: none; display: block;
-            padding: 10px 20px; font-size: 1.1rem; transition: all 0.2s ease-in-out;
+            color: var(--cor-texto-menu);
+            text-decoration: none;
+            display: block;
+            padding: 12px 20px;
+            font-size: 1rem;
+            transition: all 0.2s ease-in-out;
+            font-weight: 500;
         }
+
         .sidebar a:hover {
-            background-color: var(--cor-hover); color: white; padding-left: 25px;
+            background-color: var(--cor-hover);
+            color: var(--cor-destaque);
+            padding-left: 25px;
             border-left: 4px solid var(--cor-destaque);
         }
-        .sidebar i { margin-right: 10px; color: var(--cor-destaque); }
+
+        /* Ícones em Amarelo para destaque */
+        .sidebar i {
+            margin-right: 10px;
+            color: var(--cor-destaque);
+            font-size: 1.2rem;
+        }
+
         .navbar-mobile { background-color: var(--cor-principal) !important; }
         .menu-mobile-dropdown { background-color: var(--cor-hover); }
+
+        /* Ajuste para o link de configurações no mobile e desktop */
+        .text-warning-custom { color: var(--cor-destaque) !important; }
+
+        hr { opacity: 0.2; border-color: var(--cor-texto-menu); }
     </style>
 </head>
 <body>
@@ -40,8 +83,8 @@
     <nav class="navbar navbar-dark d-md-none col-12 navbar-mobile">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <span th:if="${@environment.getProperty('spring.profiles.active') == 'dev'}">GOL SOCIAL</span>
-                <img th:src="@{/img/logo_gol_social.jpeg}" alt="Gol Social" height="50" class="d-inline-block align-text-top">
+                <span th:if="${@environment.getProperty('spring.profiles.active') == 'dev'}">BEM VIVER</span>
+                <img th:src="@{/img/logo_bem_viver.png}" alt="Bem Viver" height="50" class="d-inline-block align-text-top">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuCelular">
                 <span class="navbar-toggler-icon"></span>
@@ -50,22 +93,22 @@
                 <div class="p-3 rounded shadow menu-mobile-dropdown">
                     <p class="text-white-50 small mb-2" sec:authentication="name">Usuário</p>
 
-                    <a href="/" class="nav-link text-white"><i class="bi bi-speedometer2"></i> Dashboard</a>
+                    <a href="/" class="nav-link text-white"><i class="bi bi-speedometer2 text-warning-custom"></i> Dashboard</a>
 
                     <a href="/inscritos" class="nav-link text-white" sec:authorize="hasRole('ADMIN')">
-                        <i class="bi bi-people-fill"></i> Beneficiários
+                        <i class="bi bi-people-fill text-warning-custom"></i> Beneficiários
                     </a>
                     <a href="/turmas" class="nav-link text-white" sec:authorize="hasRole('ADMIN')">
-                        <i class="bi bi-easel-fill"></i> Gestão de Turmas
+                        <i class="bi bi-easel-fill text-warning-custom"></i> Gestão de Turmas
                     </a>
 
-                    <a href="/frequencia" class="nav-link text-white"><i class="bi bi-calendar-check"></i> Frequência</a>
-                    <a href="/atividades" class="nav-link text-white"><i class="bi bi-journal-text"></i> Diário de Aulas</a>
+                    <a href="/frequencia" class="nav-link text-white"><i class="bi bi-calendar-check text-warning-custom"></i> Frequência</a>
+                    <a href="/atividades" class="nav-link text-white"><i class="bi bi-journal-text text-warning-custom"></i> Diário de Aulas</a>
 
                     <a href="/funcionarios" class="nav-link text-white" sec:authorize="hasRole('ADMIN')">
-                        <i class="bi bi-person-badge"></i> Funcionários
+                        <i class="bi bi-person-badge text-warning-custom"></i> Funcionários
                     </a>
-                    <a href="/configuracoes" class="nav-link text-warning" sec:authorize="hasRole('ADMIN')">
+                    <a href="/configuracoes" class="nav-link text-warning-custom" sec:authorize="hasRole('ADMIN')">
                         <i class="bi bi-gear"></i> Configurações
                     </a>
 
@@ -78,7 +121,7 @@
 
     <div class="col-md-2 sidebar d-none d-md-block">
         <div class="logo-area px-3 text-center mb-4">
-            <img th:src="@{/img/logo_gol_social.jpeg}" alt="Logo" class="img-fluid mb-2" style="max-height: 80px;">
+            <img th:src="@{/img/logo_bem_viver.png}" alt="Logo" class="img-fluid mb-2" style="max-height: 90px; filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.2));">
             <p class="small text-white-50" sec:authentication="name">Usuário</p>
         </div>
 
@@ -92,9 +135,9 @@
 
         <a href="/funcionarios" sec:authorize="hasRole('ADMIN')"><i class="bi bi-person-badge"></i> Funcionários</a>
 
-        <hr style="border-color: var(--cor-texto-menu);">
+        <hr>
 
-        <a href="/configuracoes" sec:authorize="hasRole('ADMIN')" style="color: #ffda6a;">
+        <a href="/configuracoes" sec:authorize="hasRole('ADMIN')" style="color: var(--cor-destaque);">
             <i class="bi bi-gear"></i> Configurações
         </a>
 
