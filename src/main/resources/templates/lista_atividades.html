@@ -2,6 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout :: cabecalho}"></head>
 <body>
+
+<style>
+    /* Cores atualizadas para o Projeto Bem Viver */
+    :root {
+        --cor-principal: #4A74B1; /* Azul Profundo */
+        --cor-destaque: #F7D147;  /* Amarelo Sol */
+        --cor-hover: #3a5d8f;
+    }
+
+    /* Sobrescrita de classes de cor do Bootstrap para padronização */
+    .btn-primary { background-color: var(--cor-principal) !important; border-color: var(--cor-principal) !important; color: white !important; }
+    .btn-primary:hover { background-color: var(--cor-hover) !important; border-color: var(--cor-hover) !important; }
+
+    .bg-warning { background-color: var(--cor-destaque) !important; color: #333 !important; }
+</style>
+
 <div class="container-fluid">
     <div class="row">
         <div th:replace="~{layout :: menu-lateral}"></div>

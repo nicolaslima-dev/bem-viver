@@ -3,6 +3,17 @@
 <head th:replace="~{layout :: cabecalho}"></head>
 
 <style>
+    /* Cores atualizadas para o Projeto Bem Viver */
+    :root {
+        --cor-principal: #4A74B1; /* Azul Profundo */
+        --cor-destaque: #F7D147;  /* Amarelo Sol */
+        --cor-hover: #3a5d8f;
+    }
+
+    /* Sobrescrita de classes de cor do Bootstrap para padronização */
+    .btn-primary { background-color: var(--cor-principal) !important; border-color: var(--cor-principal) !important; color: white !important; }
+    .btn-primary:hover { background-color: var(--cor-hover) !important; border-color: var(--cor-hover) !important; }
+
     /* 1. Esconde a bolinha original do Radio Button */
     .btn-check-turma {
         position: absolute;
@@ -30,9 +41,9 @@
     /* 4. ESTADO SELECIONADO (A Mágica acontece aqui) */
     /* Quando o input anterior estiver checado, muda a borda deste card */
     .btn-check-turma:checked + .card-turma-radio {
-        border-color: var(--cor-principal); /* Borda Roxa */
-        background-color: rgba(95, 27, 88, 0.05); /* Fundo levemente roxo */
-        box-shadow: 0 4px 10px rgba(95, 27, 88, 0.2); /* Sombra roxa */
+        border-color: var(--cor-principal); /* Borda Azul */
+        background-color: rgba(74, 116, 177, 0.05); /* Fundo levemente azul */
+        box-shadow: 0 4px 10px rgba(74, 116, 177, 0.2); /* Sombra azul */
     }
 
     /* 5. Ícone de Check (Aparece só quando selecionado) */

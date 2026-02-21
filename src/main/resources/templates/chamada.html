@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
     <style>
-        :root { --cor-principal: #5f1b58; --cor-destaque: #ffc107; }
+        /* Cores atualizadas para o Projeto Bem Viver */
+        :root { --cor-principal: #4A74B1; --cor-destaque: #F7D147; }
 
         .card-turma-select {
             transition: all 0.3s ease; border: 2px solid transparent; cursor: pointer;
@@ -15,8 +16,10 @@
             transform: translateY(-5px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); border-color: #e0e0e0;
         }
         .card-turma-select.ativo {
-            border-color: var(--cor-principal); background-color: rgba(95, 27, 88, 0.05);
-            box-shadow: 0 4px 10px rgba(95, 27, 88, 0.2);
+            border-color: var(--cor-principal);
+            /* RGBA atualizado para o Azul Profundo */
+            background-color: rgba(74, 116, 177, 0.05);
+            box-shadow: 0 4px 10px rgba(74, 116, 177, 0.2);
         }
         .icon-check-turma { display: none; color: var(--cor-principal); font-size: 1.5rem; }
         .card-turma-select.ativo .icon-check-turma { display: block; }
@@ -64,7 +67,8 @@
                             <i class="bi bi-check-circle-fill icon-check-turma"></i>
                         </div>
                         <div class="small text-secondary mt-2">
-                            <i class="bi bi-clock me-1"></i> <span th:text="${t.horario}"></span>
+                            <span class="d-block mb-1"><i class="bi bi-clock me-1"></i> <span th:text="${t.horario}"></span></span>
+                            <span class="d-block"><i class="bi bi-geo-alt-fill me-1"></i> <span th:text="${t.nucleo}"></span></span>
                         </div>
                     </a>
                 </div>

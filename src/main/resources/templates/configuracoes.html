@@ -4,7 +4,31 @@
 <body>
 
 <style>
-    /* Estilos personalizados para melhorar a UX */
+    /* Cores atualizadas para o Projeto Bem Viver */
+    :root {
+        --cor-principal: #4A74B1; /* Azul Profundo */
+        --cor-destaque: #F7D147;  /* Amarelo Sol */
+        --cor-hover: #3a5d8f;
+    }
+
+    /* Sobrescrita de classes de cor do Bootstrap para padronização */
+    .text-primary { color: var(--cor-principal) !important; }
+    .btn-primary { background-color: var(--cor-principal) !important; border-color: var(--cor-principal) !important; color: white !important; }
+    .btn-primary:hover { background-color: var(--cor-hover) !important; border-color: var(--cor-hover) !important; }
+    .btn-outline-primary { color: var(--cor-principal) !important; border-color: var(--cor-principal) !important; }
+    .btn-outline-primary:hover { background-color: var(--cor-principal) !important; color: white !important; }
+
+    /* Adaptando os ícones secundários para não destoarem da paleta */
+    .text-success, .text-info { color: var(--cor-principal) !important; }
+    .btn-success, .bg-info { background-color: var(--cor-destaque) !important; border-color: var(--cor-destaque) !important; color: #333 !important; }
+    .btn-success:hover { background-color: #e5be30 !important; border-color: #e5be30 !important; color: #333 !important; }
+    .btn-outline-success, .btn-outline-info { color: var(--cor-principal) !important; border-color: var(--cor-principal) !important; }
+    .btn-outline-success:hover, .btn-outline-info:hover { background-color: var(--cor-principal) !important; color: white !important; }
+    .bg-info-subtle { background-color: rgba(74, 116, 177, 0.1) !important; }
+    .alert-info { color: var(--cor-principal) !important; }
+
+
+    /* Estilos personalizados originais para melhorar a UX */
     .nav-tabs .nav-link { color: #6c757d; font-weight: 500; }
     .nav-tabs .nav-link:hover { color: var(--cor-principal); border-color: transparent transparent #ddd; }
     .nav-tabs .nav-link.active {

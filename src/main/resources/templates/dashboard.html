@@ -3,6 +3,12 @@
 <head th:replace="~{layout :: cabecalho}"></head>
 
 <style>
+    /* Cores atualizadas para o Projeto Bem Viver */
+    :root {
+        --cor-principal: #4A74B1; /* Azul Profundo */
+        --cor-destaque: #F7D147;  /* Amarelo Sol */
+    }
+
     /* Essa classe segura a altura do gráfico para ele não sumir no celular */
     .grafico-container {
         position: relative;
@@ -93,9 +99,9 @@
     var mesesDoJava = /*[[${graficoMeses}]]*/ [];
     var dadosDoJava = /*[[${graficoDados}]]*/ [];
 
-    // Conversão da cor HEX #5F1B58 para RGB (95, 27, 88) para usar no gráfico
-    var corBorda = 'rgba(95, 27, 88, 1)';
-    var corFundo = 'rgba(95, 27, 88, 0.1)'; // 10% de opacidade
+    // Conversão da cor HEX #4A74B1 (Azul Profundo) para RGB (74, 116, 177) para usar no gráfico
+    var corBorda = 'rgba(74, 116, 177, 1)';
+    var corFundo = 'rgba(74, 116, 177, 0.1)'; // 10% de opacidade
 
     var ctx = document.getElementById('meuGrafico').getContext('2d');
     var chart = new Chart(ctx, {
@@ -105,8 +111,8 @@
             datasets: [{
                 label: 'Total Acumulado',
                 data: dadosDoJava,
-                backgroundColor: corFundo,  // Fundo Roxo Claro
-                borderColor: corBorda,      // Linha Roxa Forte
+                backgroundColor: corFundo,  // Fundo Azul Claro
+                borderColor: corBorda,      // Linha Azul Forte
                 borderWidth: 3,
                 pointBackgroundColor: '#fff',
                 pointBorderColor: corBorda,

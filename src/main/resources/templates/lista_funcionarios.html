@@ -3,6 +3,23 @@
 <head th:replace="~{layout :: cabecalho}"></head>
 
 <style>
+    /* Cores atualizadas para o Projeto Bem Viver */
+    :root {
+        --cor-principal: #4A74B1; /* Azul Profundo */
+        --cor-destaque: #F7D147;  /* Amarelo Sol */
+        --cor-hover: #3a5d8f;
+    }
+
+    /* Sobrescrita de classes de cor do Bootstrap para padronização */
+    .btn-primary { background-color: var(--cor-principal) !important; border-color: var(--cor-principal) !important; color: white !important; }
+    .btn-primary:hover { background-color: var(--cor-hover) !important; border-color: var(--cor-hover) !important; }
+
+    .btn-outline-primary { color: var(--cor-principal) !important; border-color: var(--cor-principal) !important; }
+    .btn-outline-primary:hover { background-color: var(--cor-principal) !important; color: white !important; }
+
+    .btn-outline-warning { color: #856404 !important; border-color: var(--cor-destaque) !important; }
+    .btn-outline-warning:hover { background-color: var(--cor-destaque) !important; color: #333 !important; }
+
     @media (max-width: 602px) {
         .cabecalho-responsivo {
             flex-direction: column !important;

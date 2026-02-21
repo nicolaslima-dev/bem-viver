@@ -11,6 +11,17 @@
         <main class="col-md-10 ms-sm-auto px-md-4 py-4 bg-light" style="min-height: 100vh;">
 
             <style>
+                /* Cores atualizadas para o Projeto Bem Viver */
+                :root {
+                    --cor-principal: #4A74B1; /* Azul Profundo */
+                    --cor-destaque: #F7D147;  /* Amarelo Sol */
+                    --cor-hover: #3a5d8f;
+                }
+
+                /* Padronização dos botões principais */
+                .btn-primary { background-color: var(--cor-principal) !important; border-color: var(--cor-principal) !important; color: white !important; }
+                .btn-primary:hover { background-color: var(--cor-hover) !important; border-color: var(--cor-hover) !important; }
+
                 .opcao-turma-input { display: none; }
 
                 .card-turma {
@@ -21,14 +32,14 @@
                 }
 
                 .card-turma:hover {
-                    border-color: #ffc107;
+                    border-color: var(--cor-destaque); /* Hover em Amarelo Sol */
                     transform: translateY(-2px);
                 }
 
                 .opcao-turma-input:checked + .card-turma {
-                    border-color: #590d68;
-                    background-color: #fcf4fd;
-                    box-shadow: 0 4px 8px rgba(89, 13, 104, 0.15);
+                    border-color: var(--cor-principal); /* Borda em Azul Profundo */
+                    background-color: rgba(74, 116, 177, 0.05); /* Fundo azul bem claro */
+                    box-shadow: 0 4px 8px rgba(74, 116, 177, 0.15); /* Sombra azulada */
                 }
 
                 .opcao-turma-input:disabled + .card-turma {
@@ -39,7 +50,7 @@
                     transform: none;
                 }
 
-                .check-icon { display: none; color: #590d68; font-size: 1.4rem; }
+                .check-icon { display: none; color: var(--cor-principal); font-size: 1.4rem; }
                 .opcao-turma-input:checked + .card-turma .check-icon { display: block; }
 
                 .badge-vagas {
