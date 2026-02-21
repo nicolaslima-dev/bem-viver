@@ -20,7 +20,7 @@ public class EmailService {
         CreateEmailOptions params = CreateEmailOptions.builder()
                 .from("sistema@golsocial.app.br") //
                 .to(para)
-                .subject("Código de Acesso - Gol Social")
+                .subject("Código de Acesso - Bem Viver")
                 .html("Olá! Seu código de verificação é: <strong>" + codigo + "</strong>")
                 .build();
 
