@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-            <form th:action="@{/inscritos/salvar}" th:object="${inscrito}" method="post">
+            <form th:action="@{/inscritos/salvar}" th:object="${inscrito}" method="post" enctype="multipart/form-data" id="formInscricao">
                 <input type="hidden" th:field="*{id}">
 
                 <div class="card shadow-sm border-0 mb-4">
@@ -85,26 +85,32 @@
                     <div class="card-body p-4">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">Nome Completo *</label>
+                                <label class="form-label fw-bold">Nome Completo do Aluno(a) *</label>
                                 <input type="text" th:field="*{nomeCompleto}" class="form-control" required placeholder="Nome do aluno">
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="form-label fw-bold">CPF</label>
-                                <input type="text" th:field="*{cpf}" class="form-control mask-cpf" maxlength="14" placeholder="000.000.000-00">
                             </div>
 
                             <div class="col-md-3">
                                 <label class="form-label fw-bold">Sexo *</label>
                                 <select th:field="*{sexo}" class="form-select" required>
                                     <option value="">Selecione...</option>
-                                    <option value="Masculino">Masculino</option>
                                     <option value="Feminino">Feminino</option>
+                                    <option value="Masculino">Masculino</option>
                                 </select>
                             </div>
+
                             <div class="col-md-3">
+                                <label class="form-label fw-bold">CPF do Aluno(a)</label>
+                                <input type="text" th:field="*{cpf}" class="form-control mask-cpf" maxlength="14" placeholder="000.000.000-00">
+                            </div>
+
+                            <div class="col-md-4">
                                 <label class="form-label fw-bold">Data de Nascimento *</label>
-                                <input type="date" th:field="*{dataNascimento}" class="form-control" required>
+                                <input type="date" th:field="*{dataNascimento}" id="dataNascimento" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label class="form-label fw-bold">Idade *</label>
+                                <input type="number" name="idade" id="idade" class="form-control" required readonly style="background-color: #e9ecef;">
                             </div>
                         </div>
                     </div>
@@ -139,8 +145,8 @@
                     <div class="card-body p-4">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">Nome do Responsável *</label>
-                                <input type="text" th:field="*{nomeResponsavel}" class="form-control" required>
+                                <label class="form-label fw-bold">Nome Completo do Responsável</label>
+                                <input type="text" th:field="*{nomeResponsavel}" class="form-control" placeholder="Opcional">
                             </div>
 
                             <div class="col-md-3">
@@ -149,12 +155,12 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label class="form-label fw-bold">Telefone *</label>
+                                <label class="form-label fw-bold">Telefone de Contato *</label>
                                 <input type="text" th:field="*{telefone}" class="form-control mask-phone" required maxlength="15" placeholder="(XX) 9XXXX-XXXX">
                             </div>
 
                             <div class="col-12">
-                                <label class="form-label fw-bold">E-mail</label>
+                                <label class="form-label fw-bold">E-mail do Responsável</label>
                                 <input type="email" th:field="*{email}" class="form-control" placeholder="exemplo@email.com">
                             </div>
                         </div>
@@ -170,8 +176,8 @@
                         <h6 class="text-secondary fw-bold mb-3 border-bottom pb-2">Dados Escolares</h6>
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
-                                <label class="form-label fw-bold">Escolaridade *</label>
-                                <select th:field="*{escolaridade}" class="form-select" required>
+                                <label class="form-label fw-bold">Escolaridade</label>
+                                <select th:field="*{escolaridade}" class="form-select">
                                     <option value="">Selecione...</option>
                                     <option value="Fundamental Incompleto">Fundamental Incompleto</option>
                                     <option value="Fundamental Completo">Fundamental Completo</option>
@@ -214,6 +220,24 @@
                     </div>
                 </div>
 
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header text-white fw-bold py-2" style="background-color: var(--cor-principal);">
+                        <i class="bi bi-info-circle-fill me-2"></i> Informações de Registro
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Data do preenchimento *</label>
+                                <input type="date" name="dataPreenchimento" id="dataPreenchimento" class="form-control" required>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold">Lançado por *</label>
+                                <input type="text" name="lancadoPor" class="form-control" required placeholder="Nome de quem está lançando a inscrição">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="alert alert-warning border-2 d-flex align-items-center mb-4" role="alert">
                     <i class="bi bi-file-earmark-text-fill fs-2 me-3"></i>
                     <div>
@@ -227,9 +251,9 @@
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-header bg-white border-bottom">
                         <h5 class="mb-0 text-secondary fw-bold">
-                            <i class="bi bi-calendar-check me-2"></i>Selecione as Turmas (Máximo 2)
+                            <i class="bi bi-calendar-check me-2"></i>Modalidade, Polo e Horário *
                         </h5>
-                        <small class="text-muted ms-4">Caso escolha duas, deve ser uma de Futebol e uma de Futsal.</small>
+                        <small class="text-muted ms-4">Selecione a(s) turma(s) desejada(s) (Máximo 2).</small>
                     </div>
                     <div class="card-body p-4">
 
@@ -298,12 +322,14 @@
 
                 <div class="card shadow-sm border-0 mb-5">
                     <div class="card-body p-4">
-                        <div class="mb-3 p-3 bg-light border rounded">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" th:field="*{fichaAnexada}" id="checkFicha" style="cursor: pointer;">
-                                <label class="form-check-label fw-bold" for="checkFicha" style="cursor: pointer;">
-                                    <i class="bi bi-paperclip me-1"></i> A ficha de inscrição física foi escaneada e arquivada?
-                                </label>
+
+                        <div class="mb-4 p-3 bg-light border rounded">
+                            <label class="form-label fw-bold">Anexo da ficha de inscrição presencial escaneada *</label>
+                            <input type="file" name="arquivoFicha" class="form-control mb-2" accept="application/pdf" required>
+                            <small class="text-muted d-block">Faça upload de 1 arquivo aceito: PDF. O tamanho máximo é de 10 MB.</small>
+
+                            <div class="d-none">
+                                <input class="form-check-input" type="checkbox" th:field="*{fichaAnexada}" checked>
                             </div>
                         </div>
 
@@ -330,6 +356,45 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
+        // Auto preencher data de lançamento com o dia de hoje
+        const dataField = document.getElementById('dataPreenchimento');
+        if (!dataField.value) {
+            dataField.value = new Date().toISOString().split('T')[0];
+        }
+
+        // Script para calcular a Idade automaticamente
+        function calcularIdade() {
+            const inputData = document.getElementById('dataNascimento').value;
+            const inputIdade = document.getElementById('idade');
+            if (inputData) {
+                const dob = new Date(inputData);
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const m = today.getMonth() - dob.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+                inputIdade.value = age >= 0 ? age : 0;
+            } else {
+                inputIdade.value = '';
+            }
+        }
+        document.getElementById('dataNascimento').addEventListener('change', calcularIdade);
+        calcularIdade(); // Executa ao carregar para caso seja edição
+
+        // Validação no envio: Garantir seleção de pelo menos 1 Turma
+        document.getElementById('formInscricao').addEventListener('submit', function(e) {
+            const turmas = document.querySelectorAll('.opcao-turma-input:checked');
+            if(turmas.length === 0) {
+                e.preventDefault();
+                alert('Por favor, selecione pelo menos uma Turma (Modalidade, Polo e Horário).');
+            } else if(turmas.length > 2) {
+                e.preventDefault();
+                alert('Você pode selecionar no máximo 2 turmas.');
+            }
+        });
+
+        // Máscaras de CPF e Telefone
         const cpfInputs = document.querySelectorAll('.mask-cpf');
         cpfInputs.forEach(input => {
             input.addEventListener('input', function(e) {
