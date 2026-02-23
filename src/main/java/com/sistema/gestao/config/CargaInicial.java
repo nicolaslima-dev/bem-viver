@@ -22,8 +22,8 @@ public class CargaInicial implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        // O email que será o Login
-        String emailAdmin = "admin@golsocial.br";
+        // O novo email que será o Login exclusivo do Bem Viver
+        String emailAdmin = "admin@bemviver.br";
 
         Optional<Funcionario> adminExistente = funcionarioRepository.findByEmail(emailAdmin);
 
@@ -32,7 +32,7 @@ public class CargaInicial implements CommandLineRunner {
 
             // Dados de Login
             admin.setEmail(emailAdmin);
-            admin.setSenha(passwordEncoder.encode("580206"));
+            admin.setSenha(passwordEncoder.encode("580206")); // Senha mantida conforme solicitado
             admin.setPerfil("ADMIN");
             admin.setAtivo(true);
 
