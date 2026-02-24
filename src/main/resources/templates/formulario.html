@@ -112,6 +112,16 @@
                                 <label class="form-label fw-bold">Idade *</label>
                                 <input type="number" name="idade" id="idade" class="form-control" required readonly style="background-color: #e9ecef;">
                             </div>
+
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Telefone de Contato *</label>
+                                <input type="text" th:field="*{telefone}" class="form-control mask-phone" required maxlength="15" placeholder="(XX) 9XXXX-XXXX">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">E-mail</label>
+                                <input type="email" th:field="*{email}" class="form-control" placeholder="exemplo@email.com">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -140,28 +150,36 @@
 
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-header text-white fw-bold py-2" style="background-color: var(--cor-principal);">
-                        <i class="bi bi-people-fill me-2"></i> Responsável Legal
+                        <i class="bi bi-heart-pulse-fill me-2"></i> Informações de Saúde
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label fw-bold">Nome Completo do Responsável</label>
-                                <input type="text" th:field="*{nomeResponsavel}" class="form-control" placeholder="Opcional">
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Peso (kg)</label>
+                                <input type="number" step="0.1" th:field="*{peso}" class="form-control" placeholder="Ex: 65.5">
                             </div>
 
                             <div class="col-md-3">
-                                <label class="form-label fw-bold">CPF do Responsável</label>
-                                <input type="text" th:field="*{cpfResponsavel}" class="form-control mask-cpf" maxlength="14" placeholder="000.000.000-00">
+                                <label class="form-label fw-bold">Altura (m)</label>
+                                <input type="number" step="0.01" th:field="*{altura}" class="form-control" placeholder="Ex: 1.65">
                             </div>
 
                             <div class="col-md-3">
-                                <label class="form-label fw-bold">Telefone de Contato *</label>
-                                <input type="text" th:field="*{telefone}" class="form-control mask-phone" required maxlength="15" placeholder="(XX) 9XXXX-XXXX">
+                                <label class="form-label fw-bold">Pressão Arterial</label>
+                                <input type="text" th:field="*{pressaoArterial}" class="form-control" placeholder="Ex: 12x8">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Toma algum remédio todos os dias?</label>
+                                <select th:field="*{usaMedicamentoContinuo}" class="form-select">
+                                    <option value="Não">Não</option>
+                                    <option value="Sim">Sim</option>
+                                </select>
                             </div>
 
                             <div class="col-12">
-                                <label class="form-label fw-bold">E-mail do Responsável</label>
-                                <input type="email" th:field="*{email}" class="form-control" placeholder="exemplo@email.com">
+                                <label class="form-label fw-bold">Se sim, quais?</label>
+                                <input type="text" th:field="*{medicamentosContinuos}" class="form-control" placeholder="Liste os remédios que toma diariamente...">
                             </div>
                         </div>
                     </div>
@@ -169,31 +187,11 @@
 
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-header text-white fw-bold py-2" style="background-color: var(--cor-principal);">
-                        <i class="bi bi-mortarboard-fill me-2"></i> Escolaridade e Análise Social
+                        <i class="bi bi-house-heart-fill me-2"></i> Análise Social
                     </div>
                     <div class="card-body p-4">
-
-                        <h6 class="text-secondary fw-bold mb-3 border-bottom pb-2">Dados Escolares</h6>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-4">
-                                <label class="form-label fw-bold">Escolaridade</label>
-                                <select th:field="*{escolaridade}" class="form-select">
-                                    <option value="">Selecione...</option>
-                                    <option value="Fundamental Incompleto">Fundamental Incompleto</option>
-                                    <option value="Fundamental Completo">Fundamental Completo</option>
-                                    <option value="Médio Incompleto">Médio Incompleto</option>
-                                    <option value="Médio Completo">Médio Completo</option>
-                                </select>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="form-label fw-bold">Nome da Escola</label>
-                                <input type="text" th:field="*{nomeEscola}" class="form-control" placeholder="Ex: Escola Municipal...">
-                            </div>
-                        </div>
-
-                        <h6 class="text-secondary fw-bold mb-3 border-bottom pb-2">Análise Social</h6>
                         <div class="row g-3">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="form-label fw-bold">Recebe Benefício Social?</label>
                                 <select th:field="*{recebeBeneficio}" class="form-select">
                                     <option value="Não">Não</option>
@@ -201,22 +199,16 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="form-label fw-bold">Renda Familiar (R$)</label>
                                 <input type="text" th:field="*{rendaFamiliar}" class="form-control" placeholder="0,00">
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="form-label fw-bold">Pessoas na Casa</label>
                                 <input type="number" th:field="*{quantasPessoasCasa}" class="form-control" placeholder="0">
                             </div>
-
-                            <div class="col-md-3">
-                                <label class="form-label fw-bold">Grau de Parentesco</label>
-                                <input type="text" th:field="*{grauParentesco}" class="form-control" placeholder="Ex: Mãe, Pai, Avó...">
-                            </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -235,16 +227,6 @@
                                 <input type="text" name="lancadoPor" class="form-control" required placeholder="Nome de quem está lançando a inscrição">
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="alert alert-warning border-2 d-flex align-items-center mb-4" role="alert">
-                    <i class="bi bi-file-earmark-text-fill fs-2 me-3"></i>
-                    <div>
-                        <h6 class="fw-bold mb-1">DOCUMENTOS NECESSÁRIOS PARA MATRÍCULA:</h6>
-                        <span class="small text-dark">
-                            IDENTIDADE, CPF, COMPROVANTE DE RESIDÊNCIA (DE AMBOS) E DECLARAÇÃO ESCOLAR.
-                        </span>
                     </div>
                 </div>
 
@@ -275,7 +257,7 @@
                                             <div>
                                                 <h6 class="fw-bold mb-1" style="color: var(--cor-principal);"
                                                     th:text="${t.modalidade} + ' - ' + ${t.nome}">
-                                                    Futsal - Sub 11
+                                                    Dança
                                                 </h6>
 
                                                 <small class="text-muted d-block fw-bold" th:text="${t.nucleo}">Núcleo 01</small>
@@ -322,16 +304,6 @@
 
                 <div class="card shadow-sm border-0 mb-5">
                     <div class="card-body p-4">
-
-                        <div class="mb-4 p-3 bg-light border rounded">
-                            <label class="form-label fw-bold">Anexo da ficha de inscrição presencial escaneada *</label>
-                            <input type="file" name="arquivoFicha" class="form-control mb-2" accept="application/pdf" required>
-                            <small class="text-muted d-block">Faça upload de 1 arquivo aceito: PDF. O tamanho máximo é de 10 MB.</small>
-
-                            <div class="d-none">
-                                <input class="form-check-input" type="checkbox" th:field="*{fichaAnexada}" checked>
-                            </div>
-                        </div>
 
                         <div class="mb-2">
                             <label class="form-label fw-bold">Observações Gerais</label>

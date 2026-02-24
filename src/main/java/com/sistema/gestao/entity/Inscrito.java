@@ -16,7 +16,7 @@ public class Inscrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // --- DADOS PESSOAIS ---
+    // --- DADOS PESSOAIS E CONTATO ---
     @NotBlank(message = "O nome é obrigatório")
     private String nomeCompleto;
 
@@ -29,6 +29,12 @@ public class Inscrito {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
 
+    @NotBlank(message = "O telefone é obrigatório")
+    private String telefone;
+
+    @Email(message = "Por favor, insira um e-mail válido (exemplo: nome@dominio.com)")
+    private String email;
+
     // --- ENDEREÇO ---
     @NotBlank(message = "O endereço é obrigatório")
     private String endereco;
@@ -39,31 +45,23 @@ public class Inscrito {
     @NotBlank(message = "A cidade é obrigatória")
     private String cidade;
 
-    // --- RESPONSÁVEL ---
-    @NotBlank(message = "O nome do responsável é obrigatório")
-    private String nomeResponsavel;
+    // --- INFORMAÇÕES DE SAÚDE ---
+    private Double peso;
 
-    private String cpfResponsavel;
+    private Double altura;
 
-    @NotBlank(message = "O telefone é obrigatório")
-    private String telefone;
+    private String pressaoArterial;
 
-    private String email;
+    private String usaMedicamentoContinuo;
 
-    // --- DADOS ESCOLARES (NOVO) ---
-    @NotBlank(message = "A escolaridade é obrigatória")
-    private String escolaridade;
+    private String medicamentosContinuos;
 
-    private String nomeEscola;
-
-    // --- ANÁLISE SOCIAL (NOVO) ---
-    private String recebeBeneficio; // Ex: "Sim", "Não"
+    // --- ANÁLISE SOCIAL ---
+    private String recebeBeneficio;
 
     private String rendaFamiliar;
 
     private Integer quantasPessoasCasa;
-
-    private String grauParentesco; // Ex: Pai, Mãe, Avó
 
     // --- MATRÍCULA (MUITOS PARA MUITOS) ---
     @ManyToMany
@@ -74,8 +72,6 @@ public class Inscrito {
     )
     @JsonIgnore
     private List<Turma> turmas = new ArrayList<>();
-
-    private boolean fichaAnexada;
 
     private String observacoes;
 
@@ -111,6 +107,12 @@ public class Inscrito {
     public LocalDate getDataNascimento() { return dataNascimento; }
     public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
 
+    public String getTelefone() { return telefone; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
     public String getEndereco() { return endereco; }
     public void setEndereco(String endereco) { this.endereco = endereco; }
 
@@ -120,24 +122,20 @@ public class Inscrito {
     public String getCidade() { return cidade; }
     public void setCidade(String cidade) { this.cidade = cidade; }
 
-    public String getNomeResponsavel() { return nomeResponsavel; }
-    public void setNomeResponsavel(String nomeResponsavel) { this.nomeResponsavel = nomeResponsavel; }
+    public Double getPeso() { return peso; }
+    public void setPeso(Double peso) { this.peso = peso; }
 
-    public String getCpfResponsavel() { return cpfResponsavel; }
-    public void setCpfResponsavel(String cpfResponsavel) { this.cpfResponsavel = cpfResponsavel; }
+    public Double getAltura() { return altura; }
+    public void setAltura(Double altura) { this.altura = altura; }
 
-    public String getTelefone() { return telefone; }
-    public void setTelefone(String telefone) { this.telefone = telefone; }
+    public String getPressaoArterial() { return pressaoArterial; }
+    public void setPressaoArterial(String pressaoArterial) { this.pressaoArterial = pressaoArterial; }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getUsaMedicamentoContinuo() { return usaMedicamentoContinuo; }
+    public void setUsaMedicamentoContinuo(String usaMedicamentoContinuo) { this.usaMedicamentoContinuo = usaMedicamentoContinuo; }
 
-    // Novos Getters e Setters
-    public String getEscolaridade() { return escolaridade; }
-    public void setEscolaridade(String escolaridade) { this.escolaridade = escolaridade; }
-
-    public String getNomeEscola() { return nomeEscola; }
-    public void setNomeEscola(String nomeEscola) { this.nomeEscola = nomeEscola; }
+    public String getMedicamentosContinuos() { return medicamentosContinuos; }
+    public void setMedicamentosContinuos(String medicamentosContinuos) { this.medicamentosContinuos = medicamentosContinuos; }
 
     public String getRecebeBeneficio() { return recebeBeneficio; }
     public void setRecebeBeneficio(String recebeBeneficio) { this.recebeBeneficio = recebeBeneficio; }
@@ -148,9 +146,6 @@ public class Inscrito {
     public Integer getQuantasPessoasCasa() { return quantasPessoasCasa; }
     public void setQuantasPessoasCasa(Integer quantasPessoasCasa) { this.quantasPessoasCasa = quantasPessoasCasa; }
 
-    public String getGrauParentesco() { return grauParentesco; }
-    public void setGrauParentesco(String grauParentesco) { this.grauParentesco = grauParentesco; }
-
     public List<Turma> getTurmas() { return turmas; }
     public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }
 
@@ -159,9 +154,6 @@ public class Inscrito {
             this.turmas.add(turma);
         }
     }
-
-    public boolean isFichaAnexada() { return fichaAnexada; }
-    public void setFichaAnexada(boolean fichaAnexada) { this.fichaAnexada = fichaAnexada; }
 
     public String getObservacoes() { return observacoes; }
     public void setObservacoes(String observacoes) { this.observacoes = observacoes; }

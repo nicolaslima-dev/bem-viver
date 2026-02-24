@@ -181,14 +181,15 @@ public class ConfiguracaoController {
         response.setHeader("Content-Disposition", "attachment; filename=backup_alunos.csv");
         PrintWriter writer = response.getWriter();
         writer.write('\uFEFF');
-        writer.println("ID;Nome Completo;Data Nascimento;Responsavel;Telefone;Bairro;Cidade");
+        // ATUALIZADO AQUI: Colocamos CPF no lugar de Responsavel
+        writer.println("ID;Nome Completo;Data Nascimento;CPF;Telefone;Bairro;Cidade");
         List<Inscrito> lista = inscritoRepository.findAll();
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         for (Inscrito i : lista) {
             writer.println(String.format("%d;%s;%s;%s;%s;%s;%s",
                     i.getId(), tratarTexto(i.getNomeCompleto()),
                     i.getDataNascimento() != null ? i.getDataNascimento().format(fmt) : "",
-                    tratarTexto(i.getNomeResponsavel()), tratarTexto(i.getTelefone()),
+                    tratarTexto(i.getCpf()), tratarTexto(i.getTelefone()),
                     tratarTexto(i.getBairro()), tratarTexto(i.getCidade())));
         }
     }
@@ -237,12 +238,13 @@ public class ConfiguracaoController {
             zos.putNextEntry(new ZipEntry("alunos_inscritos.csv"));
             PrintWriter writerAlunos = new PrintWriter(new OutputStreamWriter(zos, StandardCharsets.UTF_8));
             writerAlunos.write('\uFEFF');
-            writerAlunos.println("ID;Nome Completo;Data Nascimento;Responsavel;Telefone;Bairro;Cidade");
+            // ATUALIZADO AQUI TAMBÉM: Colocamos CPF no lugar de Responsavel
+            writerAlunos.println("ID;Nome Completo;Data Nascimento;CPF;Telefone;Bairro;Cidade");
             for (Inscrito i : inscritoRepository.findAll()) {
                 writerAlunos.println(String.format("%d;%s;%s;%s;%s;%s;%s",
                         i.getId(), tratarTexto(i.getNomeCompleto()),
                         i.getDataNascimento() != null ? i.getDataNascimento().format(fmt) : "",
-                        tratarTexto(i.getNomeResponsavel()), tratarTexto(i.getTelefone()),
+                        tratarTexto(i.getCpf()), tratarTexto(i.getTelefone()),
                         tratarTexto(i.getBairro()), tratarTexto(i.getCidade())));
             }
             writerAlunos.flush();

@@ -44,8 +44,8 @@ public class PdfService {
             PdfWriter writer = PdfWriter.getInstance(document, out);
             document.open();
 
-            // Fonte minúscula para economizar espaço nos pulos de linha
-            Font fontEspaco = FontFactory.getFont(FontFactory.HELVETICA, 4);
+            // Fonte de espaço aumentada para dar mais respiro entre as sessões (era 5, agora 8)
+            Font fontEspaco = FontFactory.getFont(FontFactory.HELVETICA, 8);
 
             // --- CABEÇALHO ---
             PdfPTable headerTable = new PdfPTable(2);
@@ -85,10 +85,10 @@ public class PdfService {
 
             document.add(new Paragraph(" ", fontEspaco));
 
-            // --- FONTES (Sutilmente ajustadas para caber tudo) ---
-            Font fontSecao = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 9, Color.WHITE);
-            Font fontLabel = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8, Color.DARK_GRAY);
-            Font fontDados = FontFactory.getFont(FontFactory.HELVETICA, 9, Color.BLACK);
+            // --- FONTES (Aumentadas para preencher melhor a folha e leitura) ---
+            Font fontSecao = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, Color.WHITE); // Era 9
+            Font fontLabel = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 9, Color.DARK_GRAY); // Era 8
+            Font fontDados = FontFactory.getFont(FontFactory.HELVETICA, 10, Color.BLACK); // Era 9
 
             // --- DADOS PESSOAIS ---
             adicionarTituloSecaoFicha(document, "DADOS PESSOAIS DO ALUNO", fontSecao);
@@ -102,32 +102,40 @@ public class PdfService {
 
             document.add(new Paragraph(" ", fontEspaco));
 
-            // --- ENDEREÇO ---
+            // --- ENDEREÇO E CONTATO ---
             adicionarTituloSecaoFicha(document, "ENDEREÇO E CONTATO", fontSecao);
             PdfPTable tabelaEnd = criarTabelaGrade(new float[]{4f, 2f});
             addCelulaGrade(tabelaEnd, "Endereço:", inscrito.getEndereco(), fontLabel, fontDados);
             addCelulaGrade(tabelaEnd, "Bairro:", inscrito.getBairro(), fontLabel, fontDados);
             document.add(tabelaEnd);
 
-            PdfPTable tabelaCidade = criarTabelaGrade(new float[]{1f});
-            addCelulaGrade(tabelaCidade, "Cidade:", inscrito.getCidade(), fontLabel, fontDados);
-            document.add(tabelaCidade);
+            PdfPTable tabelaContato = criarTabelaGrade(new float[]{2f, 2f, 3f});
+            addCelulaGrade(tabelaContato, "Cidade:", inscrito.getCidade(), fontLabel, fontDados);
+            addCelulaGrade(tabelaContato, "Telefone:", inscrito.getTelefone(), fontLabel, fontDados);
+            addCelulaGrade(tabelaContato, "E-mail:", inscrito.getEmail(), fontLabel, fontDados);
+            document.add(tabelaContato);
 
             document.add(new Paragraph(" ", fontEspaco));
 
-            // --- RESPONSÁVEL ---
-            adicionarTituloSecaoFicha(document, "DADOS DO RESPONSÁVEL", fontSecao);
-            PdfPTable tabelaResp = criarTabelaGrade(new float[]{3f, 2f});
-            addCelulaGrade(tabelaResp, "Nome Responsável:", inscrito.getNomeResponsavel(), fontLabel, fontDados);
-            addCelulaGrade(tabelaResp, "Telefone:", inscrito.getTelefone(), fontLabel, fontDados);
-            addCelulaGrade(tabelaResp, "CPF Resp.:", inscrito.getCpfResponsavel(), fontLabel, fontDados);
-            addCelulaGrade(tabelaResp, "E-mail:", inscrito.getEmail(), fontLabel, fontDados);
-            document.add(tabelaResp);
+            // --- INFORMAÇÕES DE SAÚDE ---
+            adicionarTituloSecaoFicha(document, "INFORMAÇÕES DE SAÚDE", fontSecao);
+            PdfPTable tabelaSaude = criarTabelaGrade(new float[]{1f, 1f, 2f, 2f});
+            String peso = inscrito.getPeso() != null ? inscrito.getPeso() + " kg" : "";
+            String altura = inscrito.getAltura() != null ? inscrito.getAltura() + " m" : "";
+            addCelulaGrade(tabelaSaude, "Peso:", peso, fontLabel, fontDados);
+            addCelulaGrade(tabelaSaude, "Altura:", altura, fontLabel, fontDados);
+            addCelulaGrade(tabelaSaude, "Pressão Arterial:", inscrito.getPressaoArterial(), fontLabel, fontDados);
+            addCelulaGrade(tabelaSaude, "Uso Contínuo?", inscrito.getUsaMedicamentoContinuo(), fontLabel, fontDados);
+            document.add(tabelaSaude);
+
+            PdfPTable tabelaMedicamentos = criarTabelaGrade(new float[]{1f});
+            addCelulaGrade(tabelaMedicamentos, "Medicamentos que utiliza:", inscrito.getMedicamentosContinuos(), fontLabel, fontDados);
+            document.add(tabelaMedicamentos);
 
             document.add(new Paragraph(" ", fontEspaco));
 
-            // --- DADOS DA MATRÍCULA E ESCOLARIDADE ---
-            adicionarTituloSecaoFicha(document, "DADOS DA MATRÍCULA E ESCOLARIDADE", fontSecao);
+            // --- DADOS DA MATRÍCULA ---
+            adicionarTituloSecaoFicha(document, "DADOS DA MATRÍCULA", fontSecao);
 
             PdfPTable tabelaMatricula = criarTabelaGrade(new float[]{3.5f, 2f, 1.5f});
             if (inscrito.getTurmas() != null && !inscrito.getTurmas().isEmpty()) {
@@ -142,14 +150,11 @@ public class PdfService {
             } else {
                 PdfPCell aviso = new PdfPCell(new Phrase("Nenhuma turma selecionada.", fontDados));
                 aviso.setColspan(3);
-                aviso.setPadding(5);
+                aviso.setPadding(8);
                 tabelaMatricula.addCell(aviso);
             }
             document.add(tabelaMatricula);
-            PdfPTable tabelaEscola = criarTabelaGrade(new float[]{2f, 4f});
-            addCelulaGrade(tabelaEscola, "Escolaridade:", inscrito.getEscolaridade(), fontLabel, fontDados);
-            addCelulaGrade(tabelaEscola, "Nome da Escola:", inscrito.getNomeEscola(), fontLabel, fontDados);
-            document.add(tabelaEscola);
+
             document.add(new Paragraph(" ", fontEspaco));
 
             // --- ANÁLISE SOCIAL ---
@@ -160,22 +165,6 @@ public class PdfService {
             String pessoas = inscrito.getQuantasPessoasCasa() != null ? String.valueOf(inscrito.getQuantasPessoasCasa()) : "";
             addCelulaGrade(tabelaSocial, "Pessoas na Casa:", pessoas, fontLabel, fontDados);
             document.add(tabelaSocial);
-            PdfPTable tabelaParentesco = criarTabelaGrade(new float[]{1f});
-            addCelulaGrade(tabelaParentesco, "Grau de Parentesco (Responsável):", inscrito.getGrauParentesco(), fontLabel, fontDados);
-            document.add(tabelaParentesco);
-
-            // --- AVISO DE DOCUMENTOS NECESSÁRIOS ---
-            Paragraph pAviso = new Paragraph();
-            pAviso.setSpacingBefore(3f);
-            pAviso.setSpacingAfter(3f);
-            pAviso.setAlignment(Element.ALIGN_LEFT);
-            Font fontNegrito = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8, Color.BLACK);
-            Chunk cTitulo = new Chunk("DOCUMENTOS NECESSÁRIOS: ", fontNegrito);
-            Font fontNormal = FontFactory.getFont(FontFactory.HELVETICA, 8, Color.BLACK);
-            Chunk cLista = new Chunk("IDENTIDADE, CPF, COMPROVANTE DE RESIDÊNCIA (DE AMBOS) E DECLARAÇÃO ESCOLAR", fontNormal);
-            pAviso.add(cTitulo);
-            pAviso.add(cLista);
-            document.add(pAviso);
 
             // --- DATA E ASSINATURA ---
             PdfPTable assinaturaTable = new PdfPTable(1);
@@ -188,19 +177,21 @@ public class PdfService {
             cellData.setHorizontalAlignment(Element.ALIGN_RIGHT);
             cellData.setPaddingBottom(15);
             assinaturaTable.addCell(cellData);
+
             PdfPCell cellLinhaAss = new PdfPCell(new Phrase("__________________________________________________________", fontDados));
             cellLinhaAss.setBorder(Rectangle.NO_BORDER);
             cellLinhaAss.setHorizontalAlignment(Element.ALIGN_CENTER);
             assinaturaTable.addCell(cellLinhaAss);
-            PdfPCell cellAss = new PdfPCell(new Phrase("Assinatura do Responsável", fontLabel));
+
+            PdfPCell cellAss = new PdfPCell(new Phrase("Assinatura do Aluno(a)", fontLabel));
             cellAss.setBorder(Rectangle.NO_BORDER);
             cellAss.setHorizontalAlignment(Element.ALIGN_CENTER);
             assinaturaTable.addCell(cellAss);
 
-            // Posição Y da assinatura coordenada com o fim do texto
+            // ASSINATURA E DATA FIXAS (MANTIDO INTACTO EM Y=160)
             assinaturaTable.writeSelectedRows(0, -1, 36, 160, writer.getDirectContent());
 
-            // --- RODAPÉ ---
+            // --- RODAPÉ COM LOGOS ---
             adicionarRodapeComLogosFixos(writer, dadosInst.getEnderecoCompleto(), true);
 
             document.close();
@@ -397,18 +388,18 @@ public class PdfService {
         inner.addCell(cValor);
         PdfPCell cellOuter = new PdfPCell(inner);
         cellOuter.setBorder(Rectangle.BOX);
-        cellOuter.setPadding(5);
+        cellOuter.setPadding(8); // AUMENTADO para dar mais altura nos campos (era 6)
         table.addCell(cellOuter);
     }
 
-    // --- RODAPÉ COM LOGOS (Ajustado para o fundo da página) ---
+    // --- RODAPÉ COM LOGOS ---
     private void adicionarRodapeComLogosFixos(PdfWriter writer, String endereco, boolean logoGrande) {
         try {
             PdfPTable tableFooter = new PdfPTable(1);
             tableFooter.setTotalWidth(523);
             adicionarLogosEEndereco(tableFooter, endereco, logoGrande);
-            // Y=115 empurra as logos para o fundo da página, deixando a assinatura respirar
-            tableFooter.writeSelectedRows(0, -1, 36, 115, writer.getDirectContent());
+            // DESCIDA NO EIXO Y (Era 115, agora é 95 para ir mais para o fim da folha)
+            tableFooter.writeSelectedRows(0, -1, 36, 95, writer.getDirectContent());
         } catch (Exception e) { e.printStackTrace(); }
     }
 
@@ -417,7 +408,6 @@ public class PdfService {
             PdfPTable logos = new PdfPTable(3);
             logos.setWidths(new float[]{1f, 1.2f, 1.2f});
 
-            // --- COLUNA 1: UNIRIO (Esquerda) ---
             PdfPCell cellIds = new PdfPCell();
             cellIds.setBorder(Rectangle.NO_BORDER);
             cellIds.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -425,12 +415,11 @@ public class PdfService {
             try {
                 ClassPathResource imgIds = new ClassPathResource("static/img/logo_unirio.png");
                 Image logoIds = Image.getInstance(imgIds.getURL());
-                logoIds.scaleToFit(75, 65); // Tamanho reduzido para caber tudo em 1 pág
+                logoIds.scaleToFit(75, 65);
                 cellIds.addElement(logoIds);
             } catch(Exception e) {}
             logos.addCell(cellIds);
 
-            // --- COLUNA 2: IBRATEC (Centro) ---
             PdfPCell cellNovaLogo = new PdfPCell();
             cellNovaLogo.setBorder(Rectangle.NO_BORDER);
             cellNovaLogo.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -438,13 +427,12 @@ public class PdfService {
             try {
                 ClassPathResource imgNova = new ClassPathResource("static/img/logo_ibratec.png");
                 Image logoNova = Image.getInstance(imgNova.getURL());
-                logoNova.scaleToFit(110, 75); // Destacado mas proporcional
+                logoNova.scaleToFit(110, 75);
                 logoNova.setAlignment(Element.ALIGN_CENTER);
                 cellNovaLogo.addElement(logoNova);
             } catch(Exception e) {}
             logos.addCell(cellNovaLogo);
 
-            // --- COLUNA 3: MINISTÉRIO DA EDUCAÇÃO (Direita) ---
             PdfPCell cellMin = new PdfPCell();
             cellMin.setBorder(Rectangle.NO_BORDER);
             cellMin.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -489,7 +477,7 @@ public class PdfService {
         cell.setBackgroundColor(COR_CINZA_ESCURO);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        cell.setPadding(5);
+        cell.setPadding(7); // Aumentado um pouquinho para combinar
         cell.setBorder(Rectangle.NO_BORDER);
         table.addCell(cell);
         doc.add(table);
@@ -555,7 +543,6 @@ public class PdfService {
             cellAss.setPaddingBottom(15);
             tableFooter.addCell(cellAss);
             adicionarLogosEEndereco(tableFooter, endereco, false);
-            // Posição ajustada baseada na nova altura das logos
             tableFooter.writeSelectedRows(0, -1, 32, 175, writer.getDirectContent());
         } catch (Exception e) { e.printStackTrace(); }
     }
@@ -565,7 +552,6 @@ public class PdfService {
             PdfPTable tableFooter = new PdfPTable(1);
             tableFooter.setTotalWidth(550);
             adicionarLogosEEndereco(tableFooter, endereco, true);
-            // Posição Y reduzida para encaixar perfeitamente a lista de alunos
             tableFooter.writeSelectedRows(0, -1, 22, 115, writer.getDirectContent());
         } catch (Exception e) { e.printStackTrace(); }
     }
