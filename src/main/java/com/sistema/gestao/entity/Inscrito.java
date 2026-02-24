@@ -20,6 +20,7 @@ public class Inscrito {
     @NotBlank(message = "O nome é obrigatório")
     private String nomeCompleto;
 
+    @Column(unique = true) // ADICIONADO: Para evitar CPFs iguais no banco
     private String cpf;
 
     @NotBlank(message = "O sexo é obrigatório")
@@ -47,20 +48,14 @@ public class Inscrito {
 
     // --- INFORMAÇÕES DE SAÚDE ---
     private Double peso;
-
     private Double altura;
-
     private String pressaoArterial;
-
     private String usaMedicamentoContinuo;
-
     private String medicamentosContinuos;
 
     // --- ANÁLISE SOCIAL ---
     private String recebeBeneficio;
-
     private String rendaFamiliar;
-
     private Integer quantasPessoasCasa;
 
     // --- MATRÍCULA (MUITOS PARA MUITOS) ---
