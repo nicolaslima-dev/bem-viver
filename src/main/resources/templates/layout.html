@@ -93,27 +93,29 @@
                 <div class="p-3 rounded shadow menu-mobile-dropdown">
                     <p class="text-white-50 small mb-2" sec:authentication="name">Usuário</p>
 
-                    <a href="/" class="nav-link text-white"><i class="bi bi-speedometer2 text-warning-custom"></i> Dashboard</a>
+                    <a href="/" class="nav-link text-white"><i class="bi bi-speedometer2"></i> Dashboard</a>
+
+                    <a href="/perfil" class="nav-link text-white"><i class="bi bi-person-circle"></i> Meu Perfil</a>
 
                     <a href="/inscritos" class="nav-link text-white" sec:authorize="hasRole('ADMIN')">
-                        <i class="bi bi-people-fill text-warning-custom"></i> Beneficiários
+                        <i class="bi bi-people-fill"></i> Beneficiários
                     </a>
                     <a href="/turmas" class="nav-link text-white" sec:authorize="hasRole('ADMIN')">
-                        <i class="bi bi-easel-fill text-warning-custom"></i> Gestão de Turmas
+                        <i class="bi bi-easel-fill"></i> Gestão de Turmas
                     </a>
 
-                    <a href="/frequencia" class="nav-link text-white"><i class="bi bi-calendar-check text-warning-custom"></i> Frequência</a>
-                    <a href="/atividades" class="nav-link text-white"><i class="bi bi-journal-text text-warning-custom"></i> Diário de Aulas</a>
+                    <a href="/frequencia" class="nav-link text-white"><i class="bi bi-calendar-check"></i> Frequência</a>
+                    <a href="/atividades" class="nav-link text-white"><i class="bi bi-journal-text"></i> Diário de Aulas</a>
 
                     <a href="/funcionarios" class="nav-link text-white" sec:authorize="hasRole('ADMIN')">
-                        <i class="bi bi-person-badge text-warning-custom"></i> Funcionários
+                        <i class="bi bi-person-badge"></i> Funcionários
                     </a>
-                    <a href="/configuracoes" class="nav-link text-warning-custom" sec:authorize="hasRole('ADMIN')">
+                    <a href="/configuracoes" class="nav-link text-warning" sec:authorize="hasRole('ADMIN')">
                         <i class="bi bi-gear"></i> Configurações
                     </a>
 
                     <div class="border-top border-secondary my-2"></div>
-                    <a th:href="@{/logout}" class="nav-link text-danger"><i class="bi bi-box-arrow-left text-danger"></i> Sair</a>
+                    <a th:href="@{/logout}" class="nav-link text-danger"><i class="bi bi-box-arrow-left"></i> Sair</a>
                 </div>
             </div>
         </div>
@@ -121,11 +123,13 @@
 
     <div class="col-md-2 sidebar d-none d-md-block">
         <div class="logo-area px-3 text-center mb-4">
-            <img th:src="@{/img/logo_bem_viver.png}" alt="Logo" class="img-fluid mb-2" style="max-height: 90px; filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.2));">
+            <img th:src="@{/img/logo_bem_viver.png}" alt="Logo Bem Viver" class="img-fluid mb-2" style="max-height: 90px; filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.2));">
             <p class="small text-white-50" sec:authentication="name">Usuário</p>
         </div>
 
         <a href="/"><i class="bi bi-speedometer2"></i> Dashboard</a>
+
+        <a href="/perfil"><i class="bi bi-person-circle"></i> Meu Perfil</a>
 
         <a href="/inscritos" sec:authorize="hasRole('ADMIN')"><i class="bi bi-people-fill"></i> Beneficiários</a>
         <a href="/turmas" sec:authorize="hasRole('ADMIN')"><i class="bi bi-easel-fill"></i> Turmas</a>
@@ -135,9 +139,9 @@
 
         <a href="/funcionarios" sec:authorize="hasRole('ADMIN')"><i class="bi bi-person-badge"></i> Funcionários</a>
 
-        <hr>
+        <hr style="border-color: var(--cor-texto-menu);">
 
-        <a href="/configuracoes" sec:authorize="hasRole('ADMIN')" style="color: var(--cor-destaque);">
+        <a href="/configuracoes" sec:authorize="hasRole('ADMIN')" style="color: #ffda6a;">
             <i class="bi bi-gear"></i> Configurações
         </a>
 

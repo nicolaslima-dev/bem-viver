@@ -54,13 +54,46 @@
                                 <i class="bi bi-geo-alt-fill"></i> Selecione o Polo/Núcleo:
                             </label>
                             <div class="row">
-                                <div class="col-md-3 mb-2" th:each="i : ${#numbers.sequence(1, 10)}">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" th:field="*{polo}"
-                                               th:value="'Polo ' + ${i}" th:id="'polo' + ${i}" required>
-                                        <label class="form-check-label" th:for="'polo' + ${i}">
-                                            Polo <span th:text="${i}"></span>
-                                        </label>
+                                        <input class="form-check-input" type="radio" th:field="*{polo}" value="Triagem" id="poloTriagem" required>
+                                        <label class="form-check-label" for="poloTriagem">Triagem</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="*{polo}" value="Senador Camará" id="poloCamara" required>
+                                        <label class="form-check-label" for="poloCamara">Senador Camará</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="*{polo}" value="Ilha de Guaratiba" id="poloIlhaGuaratiba" required>
+                                        <label class="form-check-label" for="poloIlhaGuaratiba">Ilha de Guaratiba</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="*{polo}" value="Barra de Guaratiba" id="poloBarraGuaratiba" required>
+                                        <label class="form-check-label" for="poloBarraGuaratiba">Barra de Guaratiba</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="*{polo}" value="Vidigal" id="poloVidigal" required>
+                                        <label class="form-check-label" for="poloVidigal">Vidigal</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="*{polo}" value="PPG" id="poloPpg" required>
+                                        <label class="form-check-label" for="poloPpg">PPG</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="*{polo}" value="Rocinha" id="poloRocinha" required>
+                                        <label class="form-check-label" for="poloRocinha">Rocinha</label>
                                     </div>
                                 </div>
                             </div>
